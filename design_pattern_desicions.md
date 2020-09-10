@@ -7,4 +7,6 @@ This meant:
 
 Given the storage constraints of Ethereum, it did not make sense to store all of the words of all of the poems. 
 Rather, inspired by the mnemonic dictionary introduced in BIP39, I decided to encode these poems as byte strings.
-Given that the Darwinian Poetry was roughly 19 words longs 
+Given that the Darwinian Poetry was roughly 19 words long, Solidity's bytes32 type was capable of holding enough words and punctiation for my purposes.
+
+The most difficult part was to determine an appropriate splicing behavior and then coding it in Solidity. The approach I decided to take was to ensure that words were largely preserved.
