@@ -16,3 +16,27 @@ The hope here is that Universe lives longer, leaving a more durable trace.
 The website Universe.xyz will serve users two poems at a time, prompted them to select their favorite. When they do, they will be prompted by Metamask to sign a transaction spending the required gas to update the contract's storage with a child of their selected poem.
 
 Any poem can be looked up by ID or Owner, by using the web interface.
+
+#Setup
+Universe is deployed locally using truffle develop and react.
+
+In your first terminal
+$cd universe
+$truffle develop
+$compile
+$migrate
+
+In your second terminal, in order to launch the webserver accessible at localhost:3000
+$cd universe/app
+$npm run start
+
+#Interaction
+At localhost:3000, you will be able to interact with the universe smart contract deployed on your development server.
+
+You should be served 2 poems. 
+Clicking on one should craft transaction selecting it over the other.
+
+You can lookup a poem in the array by entering its ID.
+You can lookup your poem IDs by entering your address.
+
+
