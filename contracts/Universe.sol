@@ -2,11 +2,12 @@
 pragma solidity >=0.5.0;
 
 contract Universe {
+
     //The register of poem owners
     mapping (uint => address) public poemOwners;
     //The set of current poems
-    uint MAXPOEMS = 10;
-    bytes32[10] poems;
+    uint constant public MAXPOEMS = 10;
+    bytes32[MAXPOEMS] public poems;
     bytes32 mask = 0x00000000000000000000000000000000ffffffffffffffffffffffffffffffff;
     bytes32 mask2 = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
 
@@ -25,16 +26,28 @@ contract Universe {
     }
 
     function selectPoem(uint _selectedPoemId, uint _rejectedPoemId) public {
-        require(_selectedPoemId >= 0 && _selectedPoemId < MAXPOEMS && _rejectedPoemId >= 0 && _rejectedPoemId < MAXPOEMS);
-        require(_selectedPoemId != _rejectedPoemId);
+        require(_selectedPoemId >= 0 && _selectedPoemId < MAXPOEMS && _rejectedPoemId >= 0 && _rejectedPoemId < MAXPOEMS && _selectedPoemId != _rejectedPoemId);
         bytes32 newPoem = evolvePoem(_selectedPoemId);
         poems[_rejectedPoemId] = newPoem;
         poemOwners[_rejectedPoemId] = msg.sender;
         emit LogNewPoem(_rejectedPoemId, msg.sender, newPoem);
     }
 
-    function getPoem(uint _selectedPoemId) view public returns (bytes32) {
-        return poems[_selectedPoemId];
+    function getPoems() view public returns (bytes32[MAXPOEMS] memory) {
+        return poems;
+    }
+
+    function getPoem() view public returns (bytes32) {
+        return poems[0];
+    }
+    function getPoemOwner(uint id) view public returns (address poemOwner) {
+        require(id <= MAXPOEMS);
+        return poemOwners[id];
+    }
+    function getTwoPoems() view public returns (uint IDofFirstPoem, bytes32 poemA, uint IDofSecondPoem, bytes32 poemB) {
+        uint arbitraryPoem1 = uint(block.timestamp % MAXPOEMS);
+        uint arbitraryPoem2 = uint((block.timestamp + (block.number % MAXPOEMS) + 1) % MAXPOEMS);
+        return (arbitraryPoem1, poems[arbitraryPoem1], arbitraryPoem2, poems[arbitraryPoem2]);
     }
 
     function evolvePoem(uint _selectedPoemId) internal returns (bytes32) {
@@ -58,5 +71,4 @@ contract Universe {
         //emit LogData("evolvedPoem", evolvedPoem);
         return evolvedPoem;
     }
-
 }
