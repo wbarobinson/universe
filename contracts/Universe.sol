@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.5.0;
+import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract Universe {
-
+    using SafeMath for uint;
     //The register of poem owners
     mapping (uint => address) public poemOwners;
     //The set of current poems
@@ -28,7 +29,7 @@ contract Universe {
         }
     }
     
-    function getDictionary() view public returns (string) {
+    function getDictionary() view public returns (string memory) {
         return URL;
     }
     
@@ -52,16 +53,16 @@ contract Universe {
         return poemOwners[id];
     }
     function getTwoPoems() view public returns (uint IDofFirstPoem, bytes32 poemA, uint IDofSecondPoem, bytes32 poemB) {
-        uint arbitraryPoem1 = uint(block.timestamp % MAXPOEMS);
-        uint arbitraryPoem2 = uint((block.timestamp + (block.number % MAXPOEMS) + 1) % MAXPOEMS);
+        uint arbitraryPoem1 = uint(block.timestamp.mod(MAXPOEMS));
+        uint arbitraryPoem2 = uint((block.timestamp + (block.number.mod(MAXPOEMS)) + 1).mod(MAXPOEMS));
         return (arbitraryPoem1, poems[arbitraryPoem1], arbitraryPoem2, poems[arbitraryPoem2]);
     }
 
     function evolvePoem(uint _selectedPoemId) internal returns (bytes32) {
         //Get an arbitrary number... undesired behavior: if too many calls in same block, the same poem will used each time and kill biodiversity
-        uint arbitraryMate = uint(block.timestamp % MAXPOEMS);
+        uint arbitraryMate = uint(block.timestamp.mod(MAXPOEMS));
         //Move the mask to pick a random 32 contiguous bytes
-        uint arbitraryGeneShare = uint(block.timestamp % 128);
+        uint arbitraryGeneShare = uint(block.timestamp.mod(128));
         //emit LogData("mask", mask);
         //Move the mask
         bytes32 tempMask1 = mask << arbitraryGeneShare;

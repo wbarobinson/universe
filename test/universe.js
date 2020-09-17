@@ -1,4 +1,5 @@
 const Universe = artifacts.require("Universe");
+const LibraryDemo = artifacts.require("LibraryDemo");
 
 contract("Universe", accounts => {
   
@@ -11,7 +12,7 @@ contract("Universe", accounts => {
     var poemOwner = await universeInstance.getPoemOwner(0);
     console.log("Owner of poem 0 is", poemOwner);
 
-    assert.equal(poemOwner, null, "PoemOwner should not be set");
+    assert.equal(poemOwner, 0, "PoemOwner should not be set");
 
   });
   
