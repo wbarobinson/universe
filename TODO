@@ -1,10 +1,5 @@
-0. Validate that LibaryDemo.sol works
 
-0a. Construct 5 tests to prove LibraryDemo.sol works.
 
-1. Deploy your application onto one of the test networks. Include a document called deployed_addresses.txt that describes where your contracts live (which testnet and address).
-
-2. You can verify your contract source code using etherscan for the appropriate testnet https://etherscan.io/verifyContract 
 
 3. Sign transactions using MetaMask or uPort
 
