@@ -10,6 +10,9 @@ contract Universe {
     bytes32[MAXPOEMS] public poems;
     bytes32 mask = 0x00000000000000000000000000000000ffffffffffffffffffffffffffffffff;
     bytes32 mask2 = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+    
+    //The IPFS hash of the words
+    string URL = "https://ipfs.io/ipfs/QmZVoGsGAmCDRFAZYoeiNpbgD4j3Qgdde66XXVj1WYS3q";
 
     event LogNewPoem(uint rejectedPoemId, address owner, bytes32 newPoem);
     //event LogData(string explainer, bytes32 mask);
