@@ -27,7 +27,11 @@ contract Universe {
             emit LogNewPoem(i, msg.sender, poems[i]);
         }
     }
-
+    
+    function getDictionary() view public returns (string) {
+        return URL;
+    }
+    
     function selectPoem(uint _selectedPoemId, uint _rejectedPoemId) public {
         require(_selectedPoemId >= 0 && _selectedPoemId < MAXPOEMS && _rejectedPoemId >= 0 && _rejectedPoemId < MAXPOEMS && _selectedPoemId != _rejectedPoemId);
         bytes32 newPoem = evolvePoem(_selectedPoemId);
