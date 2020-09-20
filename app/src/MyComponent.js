@@ -9,7 +9,7 @@ export default ({ drizzle, drizzleState }) => {
   return (
     <div className="App">
 
-      <div className="section">
+      {/* <div className="section">
         <h2>Active Account</h2>
         <AccountData
           drizzle={drizzle}
@@ -18,27 +18,22 @@ export default ({ drizzle, drizzleState }) => {
           units="ether"
           precision={3}
         />
-      </div>
+      </div> */}
 
       <div className="section">
 
         <p>
-          <strong>The Poems of Our Generation </strong>
-          {/* <ContractData
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            contract="Universe"
-            method="getPoem"
-            methodArgs=""
-          /> */}
+          <h1>Appraise These Poems:</h1>
+
           <ContractData
             drizzle={drizzle}
             drizzleState={drizzleState}
             contract="Universe"
             method="getTwoPoems"
+
           />
         </p>
-        <strong>Select a Poem over Another</strong>
+        <h1>Now Select One Poem Over Another</h1>
         <ContractForm 
           drizzle={drizzle} 
           drizzleState={drizzleState}
@@ -47,6 +42,16 @@ export default ({ drizzle, drizzleState }) => {
           sendArgs=""
           labels={["Selected Poem", "Rejected Poem"]} 
         />
+
+        <h1>You can find the dictionary here:</h1>
+
+          <ContractData
+            drizzle={drizzle}
+            drizzleState={drizzleState}
+            contract="Universe"
+            method="getDictionary"
+
+          />
       </div>
     </div>
   );
