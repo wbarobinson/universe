@@ -1,5 +1,4 @@
 const Universe = artifacts.require("Universe");
-const LibraryDemo = artifacts.require("LibraryDemo");
 
 contract("Universe", accounts => {
   
