@@ -1,4 +1,6 @@
 double check that the code has been verified on etherscan.
 Stop the same poem from being grabbed by get poems.
+ Smart Contract code should be commented according to the specs in the documentation
 
 4. Record your screen as you demo the application, showing and explaining how you included the required components.
+Try and put this in docker.
