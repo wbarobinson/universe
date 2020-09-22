@@ -53,8 +53,14 @@ contract Universe {
         return poemOwners[id];
     }
     function getTwoPoems() view public returns (uint IDofFirstPoem, bytes32 poemA, uint IDofSecondPoem, bytes32 poemB) {
+        //Get one arbitrary poem ID using timestamp
         uint arbitraryPoem1 = uint(block.timestamp.mod(MAXPOEMS));
-        uint arbitraryPoem2 = uint((block.timestamp + (block.number.mod(MAXPOEMS)) + 1).mod(MAXPOEMS));
+        //Get a second, but different arbitrary poem ID using block height
+        if(block.number.mod(MAXPOEMS) != block.timestamp.mod(MAXPOEMS)) {
+        uint arbitraryPoem2 = block.number.mod(MAXPOEMS);
+        } else {
+        uint arbitraryPoem2 = block.number.mod(MAXPOEMS) + 1;
+        }
         return (arbitraryPoem1, poems[arbitraryPoem1], arbitraryPoem2, poems[arbitraryPoem2]);
     }
 
