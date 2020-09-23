@@ -24,13 +24,13 @@ contract("Universe", accounts => {
   it("...should overwrite first poem.", async () => {
     const universeInstance = await Universe.deployed();
 
-    var poem0 = await universeInstance.getPoem();
+    var poem0 = await universeInstance.getPoem(0, { from: accounts[0] });
     console.log("First poem at start", poem0)
 
     //evolved a poem by selecting it against another
     await universeInstance.selectPoem(1, 0, { from: accounts[0] });
 
-    var newPoem0 = await universeInstance.getPoem();
+    var newPoem0 = await universeInstance.getPoem(0, { from: accounts[0] });
     console.log("First poem after being overwritte", newPoem0);
 
     assert.notEqual(poem0, newPoem0, "The first poem was not overwritten despite being killed.");
@@ -46,7 +46,7 @@ contract("Universe", accounts => {
     var poems = await universeInstance.getPoems();
     console.log("all poems", poems)
 
-    assert.equal(poems.length, 10, "Ten poems should have been created.")
+    assert.equal(poems.length, 200, "Two hundred poems should have been created.")
 
   });
   
