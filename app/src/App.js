@@ -15,7 +15,7 @@ const App = () => {
           const { drizzle, drizzleState, initialized } = drizzleContext;
 
           if (!initialized) {
-            return "Loading..."
+            return "You probably need to connect to Ropsten with Metamask or something like it."
           }
 
           return (
