@@ -7,7 +7,7 @@ contract Universe {
     //The register of poem creators
     mapping (uint => address) public poemOwners;
     //The maximum number of poems
-    uint constant public MAXPOEMS = 200;
+    uint constant public MAXPOEMS = 100;
     //The array of all poems
     bytes32[MAXPOEMS] public poems;
     //A mask for selecting half of the poems
@@ -16,7 +16,7 @@ contract Universe {
     bytes32 mask2 = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
     
     //The IPFS hash of the words
-    string URL = "https://ipfs.io/ipfs/QmQQWjbDvhHWpNvQh8yV4fu43hdSBwhrnPrZRTBXCAaWLW";
+    string URL = "https://ipfs.io/ipfs/QmbKfq8MUGduaTk71aegxpzUseBxmufXW9MPaLy7c31Bcu";
     
     //An event to log all newly made poems
     event LogNewPoem(uint rejectedPoemId, address owner, bytes32 newPoem);

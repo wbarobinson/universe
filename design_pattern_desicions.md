@@ -1,6 +1,6 @@
 The goal of the project was to as closely emulate David Rea's Darwinian Poetry as possible. 
 This meant:
-- starting with 1000 poems;
+- starting with 200 poems;
 - whose words originated from pre-existing poetry;
 - where poems could be selected froms pairs to be spliced (in an undocumented way);
 - and where poems were destroyed.
@@ -28,7 +28,7 @@ Using bit shifting (<<) of up to 128 bits, the mask can essentially cover any 16
 The pseudo-random shift is just the timestamp modulo 128. While I am cognizant of the timestamp's manipulability by miners, I am not worried about someone taking the extra effort to get a good result and the same goes for all other pseudo-random elements in this process.
 
 The next step is to select a pseudo-random partner poem. This, like the bit shift, is a simple modulo of the timestamp.
-The next step would normally have been to take that same mask and to NAND the partner poem. By doing so, the partner poem could AND mask the selected poem to produce a child where most words would be atomically merged. However, the NAND function does not exist, so I created a workaround where a second mask is introduced in the global variables. This mask is 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffff and gets OR (r) masked by the bit shifted mask, thus producing the complementary mask required to AND the partner poem.
+The next step would normally have been to take that same mask and to NAND the partner poem. By doing so, the partner poem could AND mask the selected poem to produce a child where most words would be atomically merged. However, the NAND function does not exist, so I created a workaround where a second mask is introduced in the global variables. This mask is 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffff and gets OR masked by the bit shifted mask, thus producing the complementary mask required to AND the partner poem.
 
 #On Partial Word Atomicity
 I could have bitshifted in such a way as to produce perfect word atomicity, but I instead made it so there would likely be 2 newly introduced words or punctuations. 
@@ -40,4 +40,7 @@ Given that selecting a poem changes the state of the contract, best practice lea
 
 #On the absence of transfers
 It would have been trivial to implement a transfer ownership function, but the desire was not to cast creators as owners. This is doubly the case by virtue of everyone's ability to destroy another else's poem from the array of poems.
+
+#On the absence of a circuit breaker
+The entire point of the project is to keep it alive forever. Circuit breakers do not prevent any risk and introduce an unwanted function instead.
 

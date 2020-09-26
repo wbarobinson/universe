@@ -1,17 +1,17 @@
 const path = require("path");
 var HDWalletProvider = require("truffle-hdwallet-provider");
-const MNEMONIC = "secret"
+const MNEMONIC = "cinnamon country ahead satoshi chef comic account two copper estate raise post"
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
   contracts_build_directory: path.join(__dirname, "app/src/contracts"),
   networks: {
-    develop: { // default with truffle unbox is 7545, but we can use develop to test changes, ex. truffle migrate --network develop
-      host: "127.0.0.1",
-      port: 8545,
-      network_id: "*"
-    },
+    // develop: { // default with truffle unbox is 7545, but we can use develop to test changes, ex. truffle migrate --network develop
+    //   host: "127.0.0.1",
+    //   port: 8545,
+    //   network_id: "*"
+    // },
     ropsten: {
       provider: function() {
         return new HDWalletProvider(MNEMONIC, "https://ropsten.infura.io/v3/8eaa8e1b34a04ab4bb59e3d10b985fd6")
