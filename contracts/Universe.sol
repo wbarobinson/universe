@@ -16,7 +16,7 @@ contract Universe {
     bytes32 mask2 = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
     
     //The IPFS hash of the words
-    string URL = "https://ipfs.io/ipfs/QmZVoGsGAmCDRFAZYoeiNpbgD4j3Qgdde66XXVj1WYS3q";
+    string URL = "https://ipfs.io/ipfs/QmQQWjbDvhHWpNvQh8yV4fu43hdSBwhrnPrZRTBXCAaWLW";
     
     //An event to log all newly made poems
     event LogNewPoem(uint rejectedPoemId, address owner, bytes32 newPoem);
