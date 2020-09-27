@@ -29,9 +29,9 @@ function renderPoem(hexPoem) {
 //call the function using drizzle.web3
 
 function renderWords(displayData) {
-  return <div><pre>{"Poem " + displayData.IDofFirstPoem + ": " + renderPoem(displayData.poemA)}</pre>
+  return <div><h2><pre>{"Poem " + displayData.IDofFirstPoem + ": " + renderPoem(displayData.poemA)}</pre>
   <br/> 
-  <pre>{"Poem " + displayData.IDofSecondPoem + ": " + renderPoem(displayData.poemB)}</pre></div>;
+  <pre>{"Poem " + displayData.IDofSecondPoem + ": " + renderPoem(displayData.poemB)}</pre></h2></div>;
 }
 
 export default ({ drizzle, drizzleState }) => {
@@ -65,7 +65,7 @@ export default ({ drizzle, drizzleState }) => {
           />
 
         </p>
-        <h1>Now Select One Poem Over Another</h1>
+        <h1>Now Select One Poem Over Another:</h1>
         <ContractForm 
           drizzle={drizzle} 
           drizzleState={drizzleState}
@@ -75,7 +75,7 @@ export default ({ drizzle, drizzleState }) => {
           labels={["Selected Poem", "Rejected Poem"]} 
         />
 
-        <h1>You can find the dictionary here:</h1>
+        <h2>You can find the dictionary here:</h2>
 
           <ContractData
             drizzle={drizzle}
