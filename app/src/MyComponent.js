@@ -34,12 +34,15 @@ function renderPoem(hexPoem) {
 
 function renderWords(displayData) {
   return <div>
-    <h1>{"Poem " + displayData.IDofFirstPoem}</h1> 
-    <h1>{renderPoem(displayData.poemA)}</h1>
-    <br></br>
-    <h1>{"Poem " + displayData.IDofSecondPoem}</h1>
-    <h1>{renderPoem(displayData.poemB)}</h1>
-    </div>;
+          <h1 class="poem">
+          {"Poem " + displayData.IDofFirstPoem}
+          <br></br>
+          {renderPoem(displayData.poemA)}</h1>
+          <h1 class="poem">
+          {"Poem " + displayData.IDofSecondPoem}
+          <br></br>
+          {renderPoem(displayData.poemB)}</h1>
+        </div>;
 }
 
 export default ({ drizzle, drizzleState }) => {
@@ -62,7 +65,7 @@ export default ({ drizzle, drizzleState }) => {
       <div className="section">
 
         <p>
-          <h3>"(i)n all likelihood . . . both be abysmal pieces of nonsensical garbage. That's ok. All you have to do is read them both and pick the one you find more appealing, for whatever reason. Your decision might be based on a single word that you happen to like. It doesn't matter. Just pick whichever one strikes your fancy."</h3> 
+          <h3 class="intro">"In all likelihood . . . both (will) be abysmal pieces of nonsensical garbage. That's ok. All you have to do is read them both and pick the one you find more appealing, for whatever reason. Your decision might be based on a single word that you happen to like. It doesn't matter. Just pick whichever one strikes your fancy."</h3> 
           <h3>- David Rea</h3>
           <br></br>
 
