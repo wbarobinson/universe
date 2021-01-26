@@ -15,11 +15,8 @@ contract Universe {
     //A mask to be used when selecting the other half
     bytes32 mask2 = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
     
-    //The IPFS hash of the words
-    string URL = "https://ipfs.io/ipfs/QmbKfq8MUGduaTk71aegxpzUseBxmufXW9MPaLy7c31Bcu";
-    
     //An event to log all newly made poems
-    event LogNewPoem(uint rejectedPoemId, address owner, bytes32 newPoem);
+    event LogNewPoem(uint rejectedPoemId, bytes32 newPoem);
 
     /*
      * constructor that creates the initial set of poems
@@ -32,15 +29,8 @@ contract Universe {
         //Create the remaining poems
         for(uint i=1; i<poems.length; i++) {
             poems[i] = keccak256(abi.encodePacked(poems[i-1]));
-            emit LogNewPoem(i, msg.sender, poems[i]);
+            emit LogNewPoem(i, poems[i]);
         }
-    }
-    /*
-     * A function to get hardcoded url of the dictionary
-     * @returns the url of the dictionary on ipfs
-    */    
-    function getDictionary() view public returns (string memory) {
-        return URL;
     }
      /*
      * A function that will delete a poem from the array of poems and
@@ -71,29 +61,6 @@ contract Universe {
     */
     function getPoem(uint id) view public returns (bytes32) {
         return poems[id];
-    }
-    /*
-     * A function to get a poem's creator
-     * @param is the index of the poem in the array of poems
-     * @returns the poem at the index specified
-    */
-    function getPoemOwner(uint id) view public returns (address poemOwner) {
-        require(id < MAXPOEMS);
-        return poemOwners[id];
-    }
-    /*
-     * A function to get two different arbitrary poems
-     * @returns two poems and their indices
-    */
-    function getTwoPoems() view public returns (uint IDofFirstPoem, bytes32 poemA, uint IDofSecondPoem, bytes32 poemB) {
-        //Get one arbitrary poem ID using timestamp
-        uint arbitraryPoem1 = uint(block.timestamp.mod(MAXPOEMS));
-        uint arbitraryPoem2 = uint(block.number.mod(MAXPOEMS));
-        //Make sure second arbitrary poem ID using block height is difference from arbitraryPoem1
-        if(arbitraryPoem1 == arbitraryPoem2) {
-        arbitraryPoem2++;
-        }
-        return (arbitraryPoem1, poems[arbitraryPoem1], arbitraryPoem2, poems[arbitraryPoem2]);
     }
      /*
      * An internal function to get the splice of two poems
