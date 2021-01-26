@@ -4,8 +4,12 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract Universe {
     using SafeMath for uint;
-    //The register of poem creators
-    mapping (uint => address) public poemOwners;
+    //Total votes cast
+    uint public totalVotes = 0;
+    //Maximum number of votes that can be cast
+    uint constant public MAXVOTES = 100000;
+    //Balance of votes cast by poem judges
+    mapping (address => unit) public judgeBalances;
     //The maximum number of poems
     uint constant public MAXPOEMS = 100;
     //The array of all poems
@@ -42,10 +46,13 @@ contract Universe {
     */   
     function selectPoem(uint _selectedPoemId, uint _rejectedPoemId) public {
         require(_selectedPoemId >= 0 && _selectedPoemId < MAXPOEMS && _rejectedPoemId >= 0 && _rejectedPoemId < MAXPOEMS && _selectedPoemId != _rejectedPoemId);
+        require(totalVotes < MAXVOTES);
         bytes32 newPoem = evolvePoem(_selectedPoemId);
         poems[_rejectedPoemId] = newPoem;
-        poemOwners[_rejectedPoemId] = msg.sender;
-        emit LogNewPoem(_rejectedPoemId, msg.sender, newPoem);
+        //Is this the correct method for incrementing the Balance of msg.sender?
+        judgeBalances[msg.sender] = judgeBalances[msg.sender] + 1;
+        totalVotes = totalVotes + 1;
+        emit LogNewPoem(_rejectedPoemId, newPoem);
     }
     /*
      * A function to get all poems
